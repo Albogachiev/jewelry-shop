@@ -68,7 +68,7 @@ function App() {
     <AppContext.Provider value={{cartItems,addToCard,favorited,items,isItemAdded, onAddToFavorite,setCartItems,cartItems}}>
 
       <div className='wrapper'>
-      // import AppContext from '../pages/context'; {/* {cartOpened ? <Drawer items={cartItems} onCloseCart={()=> setCartOpened(false)} onRemove={onRemove} /> : null} */}
+      {/* {cartOpened ? <Drawer items={cartItems} onCloseCart={()=> setCartOpened(false)} onRemove={onRemove} /> : null} */}
     
         <Drawer items={cartItems} onCloseCart={()=> setCartOpened(false)} onRemove={onRemove} opened={cartOpened} />
 
