@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import AppContext from '../pages/context';
+import { useCart } from '../hooks/useCart';
 
 const Header = (props) => {
+    const { summBasket } = useCart()
     return ( 
         <div>
 
@@ -18,14 +21,16 @@ const Header = (props) => {
        <ul className='headerRight'>
             <li style={{cursor:"pointer"}} className='basket'>
                 <img onClick={props.onClickCart} alt='корзина юзера' src='/img/basket.svg' />
-                <span onClick={props.onClickCart}>1205 руб.</span>
+                <span onClick={props.onClickCart}>{summBasket}</span>
             </li>
             <li>
                 <Link to='/favorites'>
                 <img alt='иконкаДизЛайк' className='liked' src='/img/noLiked.svg' />
                 </Link>
             </li>
+            <Link to='/orders'>
             <img alt='иконка юзера' src='/img/userIcon.svg' />
+            </Link>
             <li>
 
             </li>

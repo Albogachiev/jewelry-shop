@@ -43,7 +43,9 @@ const Card = ({id,title,price,imageUrl, favaritedImg = false,onFavorite,onPlus, 
          "0" width="70" height="10" />
            </ContentLoader>) : (
            <>
+           {onFavorite && 
            <img onClick={like} alt='liked' className={style.liked} src={favorite ? '/img/yeaLiked.svg' : '/img/noLiked.svg'} />
+           }
            <img className={style.imgJewelry} src={imageUrl} alt='imgCard' />
            <p>{title}</p>
            <div className={style.infoProduct}>
@@ -51,10 +53,11 @@ const Card = ({id,title,price,imageUrl, favaritedImg = false,onFavorite,onPlus, 
                <span>Цена:</span>
                <b>{price} руб</b>
            </div>
-                   <img 
+                   {onPlus && (<img 
                    onClick={onClickPlus} 
                    className={isItemAdded(id) ? style.onClick : style.imgAdd} 
-                   src={ isItemAdded(id) ? '/img/addedPlus.svg' : '/img/add.svg'} alt='' />
+                   src={ isItemAdded(id) ? '/img/addedPlus.svg' : '/img/add.svg'} alt='' />)
+                    }
            </div>
            </>)
            }

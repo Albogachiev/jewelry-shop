@@ -5,8 +5,7 @@ import Card from "../Card";
 const Home = ({items,onChangeSearch,onAddToFavorite, addToCard, searchValue,isLoading}) => {
     const renderItems = () =>{
         const filteredItems = items.filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
-      return (isLoading ? [...Array(8)] : filteredItems)
-                .map((obj, index) => 
+      return (isLoading ? [...Array(8)] : filteredItems).map((obj, index) => 
                ( <Card
                 onFavorite={(item) => onAddToFavorite(item)}
                 key={index}

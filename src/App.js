@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Route, Routes } from 'react-router-dom'
 import Header from './components/Header/Header';
 import Home from './components/pages/Home';
@@ -6,9 +6,10 @@ import Favorites from './components/pages/Favorites';
 import Drawer from './components/Drawer';
 import axios from 'axios';
 import AppContext from './components/pages/context';
+import { Orders } from './components/pages/Orders';
 
 function App() {
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = React.useState(false);
     const [searchValue, setSearchValue] = React.useState('')
     const [cartOpened, setCartOpened] = React.useState(false)
     const [items, setItems] = React.useState([]);
@@ -20,11 +21,11 @@ function App() {
             const cardRespons = await axios.get('https://6454fbfcf803f3457636e268.mockapi.io/card')
             const favoritRespons = await axios.get('https://6454fbfcf803f3457636e268.mockapi.io/card')
             const itemRespons = await axios.get('https://6454fbfcf803f3457636e268.mockapi.io/items')
-            setIsLoading(false)
             
             setCartItems(favoritRespons.data)
             setFavorited(cardRespons.data)
             setItems(itemRespons.data)
+            setIsLoading(false)
         } 
         fetchData()
     }, []);
@@ -64,11 +65,12 @@ function App() {
         return cartItems.some(item => Number(item.id) === Number(id))
     }
   return (                    
-    <AppContext.Provider value={{cartItems,favorited,items,isItemAdded, onAddToFavorite,setCartItems,cartItems}}>
+    <AppContext.Provider value={{cartItems,addToCard,favorited,items,isItemAdded, onAddToFavorite,setCartItems,cartItems}}>
 
       <div className='wrapper'>
-        
-        {cartOpened ? <Drawer items={cartItems} onCloseCart={()=> setCartOpened(false)} onRemove={onRemove} /> : null}
+      // import AppContext from '../pages/context'; {/* {cartOpened ? <Drawer items={cartItems} onCloseCart={()=> setCartOpened(false)} onRemove={onRemove} /> : null} */}
+    
+        <Drawer items={cartItems} onCloseCart={()=> setCartOpened(false)} onRemove={onRemove} opened={cartOpened} />
 
          <Header onClickCart={()=> setCartOpened(true)}/>
 
@@ -86,6 +88,9 @@ function App() {
         </Routes>
         <Routes>
             <Route path='/favorites' element={<Favorites onAddToFavorite={onAddToFavorite}  />} />
+        </Routes>
+        <Routes>
+            <Route path='/orders' element={<Orders />} />
         </Routes>
 
 </div>

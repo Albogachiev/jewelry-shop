@@ -18,7 +18,6 @@ const Favorites = ({ addToCard}) => {
             favaritedImg={favaritedImg}
             onFavorite={(obj) => onAddToFavorite(obj)}
             key={index}
-            onPlus={(obj) => addToCard(obj)}
             id={obj.id}
             title={obj.title}
             price={obj.price}
