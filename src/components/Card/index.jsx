@@ -3,17 +3,16 @@ import style from "./Card.module.scss";
 import ContentLoader from "react-content-loader";
 import AppContext from '../pages/context';
 
-const Card = ({id,title,price,imageUrl, favaritedImg = false,onFavorite,onPlus, loading = false}) =>{
+const Card = ({id,title,price,imageUrl,parentId, favaritedImg = false,onFavorite,onPlus, loading = false}) =>{
     
     const [favorite, setFavorite] = React.useState(favaritedImg)
     const {isItemAdded} = React.useContext(AppContext);
-    // console.log('id>>>', isItemAdded(id))
     
     const onClickPlus = () => {
-        onPlus({id,title,price,imageUrl})
+        onPlus({id,parentId:id,title,price,imageUrl})
     }
     const like = () =>{
-        onFavorite({id,title,price,imageUrl})
+        onFavorite({id,parentId:id,title,price,imageUrl})
         setFavorite(!favorite)
     }
     return (

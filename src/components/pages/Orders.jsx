@@ -38,4 +38,3 @@ export const Orders = () => {
 
     )
 };
-//59 min
