@@ -18,6 +18,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "dev": "nodemon src/app.js --ignore sessions --ext js,jsx",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

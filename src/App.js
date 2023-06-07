@@ -4,12 +4,14 @@ import Header from './components/Header';
 import Home from './components/pages/Home';
 import Favorites from './components/pages/Favorites';
 import Drawer from './components/Drawer';
+import { Login } from './components/Login/Login';
+import { Registration } from './components/Login/Registration';
 import axios from 'axios';
 import AppContext from './components/pages/context';
 import { Orders } from './components/pages/Orders';
 
 function App() {
-    const [isLoading, setIsLoading] = React.useState(false);
+    const [isLoading, setIsLoading] = React.useState(true);
     const [searchValue, setSearchValue] = React.useState('')
     const [cartOpened, setCartOpened] = React.useState(false)
     const [items, setItems] = React.useState([]);
@@ -21,7 +23,7 @@ function App() {
             try {
                 const cardRespons = await axios.get('https://6454fbfcf803f3457636e268.mockapi.io/card')
                 const favoritRespons = await axios.get('https://6454fbfcf803f3457636e268.mockapi.io/card')
-                const itemRespons = await axios.get('https://6454fbfcf803f3457636e268.mockapi.io/items')
+                const itemRespons = await axios.get('http://localhost:3001/items')
                 
                 setCartItems(favoritRespons.data)
                 setFavorited(cardRespons.data)
@@ -93,32 +95,34 @@ function App() {
     <AppContext.Provider value={{cartItems,addToCard,favorited,items,isItemAdded, onAddToFavorite,setCartItems,cartItems}}>
 
       <div className='wrapper'>
-      {/* {cartOpened ? <Drawer items={cartItems} onCloseCart={()=> setCartOpened(false)} onRemove={onRemove} /> : null} */}
-    
         <Drawer items={cartItems} onCloseCart={()=> setCartOpened(false)} onRemove={onRemove} opened={cartOpened} />
 
          <Header onClickCart={()=> setCartOpened(true)}/>
 
+        
         <Routes>
         <Route path='/' element={<Home 
         cartItems={cartItems}
-        onChangeSearch={onChangeSearch}
+         onChangeSearch={onChangeSearch}
          onAddToFavorite={onAddToFavorite}
          addToCard={addToCard}
          searchValue={searchValue}
          items={items}/>} 
          isLoading = {isLoading}
-        //  isItemAdded = {isItemAdded}
          />
-        </Routes>
-        <Routes>
+
+
             <Route path='/favorites' element={<Favorites onAddToFavorite={onAddToFavorite}  />} />
-        </Routes>
-        <Routes>
+
+
             <Route path='/orders' element={<Orders />} />
+
+
+            <Route path='/login' element={<Login />} />
+            <Route path='/registration' element={<Registration />} />
         </Routes>
 
-</div>
+    </div>
     </AppContext.Provider>
   );
 }

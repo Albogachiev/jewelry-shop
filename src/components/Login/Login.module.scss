@@ -1,0 +1,27 @@
+.containerLogin{
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 30px;
+    input{
+        margin-top: 30px;
+        border-radius: 20px;
+        border: 0;
+        padding: 12px;
+        width: 300px;
+    }
+    button{
+        background-color: #646864;
+        border: none;
+        color: white;
+        text-decoration: none;
+        border-radius: 15px;
+        width: 80px;
+        height: 40px;
+        margin-top: 20px;
+        cursor: pointer;
+        transition: background 0.2s ease-in-out;
+        &:hover{
+            background: lighten($color: #65a2aa, $amount: 10%)
+          }
+    }
+}
